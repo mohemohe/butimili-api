@@ -1,0 +1,15 @@
+basePath: '{{.BasePath}}'
+host: '{{.Host}}'
+info:
+  contact: {}
+  description: '{{.Description}}'
+  license: {}
+  title: butimili API
+  version: v1
+paths: {}
+securityDefinitions:
+  AccessToken:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
