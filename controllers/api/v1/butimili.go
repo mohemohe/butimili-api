@@ -24,12 +24,27 @@ const (
 	Butimili = "うおおおおおおおおおおおおあああああああああああああああああああああああああああああああ！！！！！！！！！！！ (ﾌﾞﾘﾌﾞﾘﾌﾞﾘﾌﾞﾘｭﾘｭﾘｭﾘｭﾘｭﾘｭ！！！！！！ﾌﾞﾂﾁﾁﾌﾞﾌﾞﾌﾞﾁﾁﾁﾁﾌﾞﾘﾘｲﾘﾌﾞﾌﾞﾌﾞﾌﾞｩｩｩｩｯｯｯ！！！！！！！)"
 )
 
+// @Summary 生ブチミリ
+// @Description ブチミリ本文のみを取得します。このAPIは認証なしでアクセスできます。
+// @ID get-v1-butimili-raw
+// @Produce plain
+// @Success 200 {string} Butimili "うおおおおおおおおおおおおあああああああああああああああああああああああああああああああ！！！！！！！！！！！ (ﾌﾞﾘﾌﾞﾘﾌﾞﾘﾌﾞﾘｭﾘｭﾘｭﾘｭﾘｭﾘｭ！！！！！！ﾌﾞﾂﾁﾁﾌﾞﾌﾞﾌﾞﾁﾁﾁﾁﾌﾞﾘﾘｲﾘﾌﾞﾌﾞﾌﾞﾌﾞｩｩｩｩｯｯｯ！！！！！！！)"
+// @Failure 400 {object} models.APIBase
+// @Router /api/v1/butimili/raw [get]
 func GetButimiliText(c echo.Context) error {
 	defer api.DeferGenericError(c)
 
 	return c.String(http.StatusOK, Butimili)
 }
 
+// @Summary ブチミリスト取得
+// @Description ブチミリストを取得します。
+// @ID get-v1-butimili-list
+// @Produce json
+// @Security AccessToken
+// @Success 200 {object} v1.ButimiListResponse
+// @Failure 400 {object} models.APIBase
+// @Router /api/v1/butimili/list [get]
 func ListButimili(c echo.Context) error {
 	defer api.DeferGenericError(c)
 
@@ -47,6 +62,14 @@ func ListButimili(c echo.Context) error {
 	}
 }
 
+// @Summary ブチミリ
+// @Description ブチミリストと生ブチミリを結合した文字列を取得します。
+// @ID get-v1-butimili
+// @Produce json
+// @Security AccessToken
+// @Success 200 {string} Butimili
+// @Failure 400 {object} models.APIBase
+// @Router /api/v1/butimili [get]
 func ListButimiliText(c echo.Context) error {
 	defer api.DeferGenericError(c)
 
@@ -63,6 +86,15 @@ func ListButimiliText(c echo.Context) error {
 	}
 }
 
+// @Summary ブチミリスト追加
+// @Description ブチミリストにScreenNameを追加します。
+// @ID get-v1-butimili-list
+// @Produce json
+// @Security AccessToken
+// @Param account body v1.ButimiliRequest true "アカウント情報"
+// @Success 200 {object} v1.ButimiListResponse
+// @Failure 400 {object} models.APIBase
+// @Router /api/v1/butimili/list [put]
 func PutButimili(c echo.Context) error {
 	defer api.DeferGenericError(c)
 
@@ -100,6 +132,15 @@ func PutButimili(c echo.Context) error {
 	}
 }
 
+// @Summary ブチミリスト削除
+// @Description ブチミリストからScreenNameを削除します。
+// @ID get-v1-butimili-list
+// @Produce json
+// @Security AccessToken
+// @Param screen_name path string true "ScreenName"
+// @Success 200 {object} v1.ButimiListResponse
+// @Failure 400 {object} models.APIBase
+// @Router /api/v1/butimili/list/{screen_name} [delete]
 func DeleteButimili(c echo.Context) error {
 	defer api.DeferGenericError(c)
 

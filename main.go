@@ -15,6 +15,7 @@ import (
 
 // @Title butimili API
 // @Version v1
+// @Description https://github.com/swaggo/swag の不具合で正常レスポンスの error:0 が表示されていません。全てのJSONレスポンスには error キーを含んだ応答を返します。
 // @SecurityDefinitions.apikey AccessToken
 // @In header
 // @Name Authorization

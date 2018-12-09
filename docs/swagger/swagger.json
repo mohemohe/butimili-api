@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "{{.Description}}",
+        "description": "https://github.com/swaggo/swag の不具合で正常レスポンスの error:0 が表示されていません。全てのJSONレスポンスには error キーを含んだ応答を返します。",
         "title": "butimili API",
         "contact": {},
         "license": {},
@@ -9,7 +9,418 @@
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
-    "paths": {},
+    "paths": {
+        "/api/v1/auth": {
+            "get": {
+                "security": [
+                    {
+                        "AccessToken": []
+                    }
+                ],
+                "description": "AccessTokenが有効か調べることができます。",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "認証状態取得",
+                "operationId": "get-v1-auth",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v1.AuthResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/models.APIBase"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "ユーザー名とパスワードを使用して、AccessTokenを取得します。このAPIは認証なしでアクセスできます。",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "認証",
+                "operationId": "post-v1-auth",
+                "parameters": [
+                    {
+                        "description": "認証情報",
+                        "name": "account",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v1.AuthRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v1.AuthResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/models.APIBase"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/butimili": {
+            "get": {
+                "security": [
+                    {
+                        "AccessToken": []
+                    }
+                ],
+                "description": "ブチミリストと生ブチミリを結合した文字列を取得します。",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "ブチミリ",
+                "operationId": "get-v1-butimili",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/models.APIBase"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/butimili/list": {
+            "get": {
+                "security": [
+                    {
+                        "AccessToken": []
+                    }
+                ],
+                "description": "ブチミリストを取得します。",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "ブチミリスト取得",
+                "operationId": "get-v1-butimili-list",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v1.ButimiListResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/models.APIBase"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "AccessToken": []
+                    }
+                ],
+                "description": "ブチミリストにScreenNameを追加します。",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "ブチミリスト追加",
+                "operationId": "get-v1-butimili-list",
+                "parameters": [
+                    {
+                        "description": "アカウント情報",
+                        "name": "account",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v1.ButimiliRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v1.ButimiListResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/models.APIBase"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/butimili/list/{screen_name}": {
+            "delete": {
+                "security": [
+                    {
+                        "AccessToken": []
+                    }
+                ],
+                "description": "ブチミリストからScreenNameを削除します。",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "ブチミリスト削除",
+                "operationId": "get-v1-butimili-list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ScreenName",
+                        "name": "screen_name",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v1.ButimiListResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/models.APIBase"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/butimili/raw": {
+            "get": {
+                "description": "ブチミリ本文のみを取得します。このAPIは認証なしでアクセスできます。",
+                "produces": [
+                    "text/plain"
+                ],
+                "summary": "生ブチミリ",
+                "operationId": "get-v1-butimili-raw",
+                "responses": {
+                    "200": {
+                        "description": "うおおおおおおおおおおおおあああああああああああああああああああああああああああああああ！！！！！！！！！！！ (ﾌﾞﾘﾌﾞﾘﾌﾞﾘﾌﾞﾘｭﾘｭﾘｭﾘｭﾘｭﾘｭ！！！！！！ﾌﾞﾂﾁﾁﾌﾞﾌﾞﾌﾞﾁﾁﾁﾁﾌﾞﾘﾘｲﾘﾌﾞﾌﾞﾌﾞﾌﾞｩｩｩｩｯｯｯ！！！！！！！)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/models.APIBase"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user": {
+            "post": {
+                "description": "アカウントを登録します。このAPIは認証なしでアクセスできます。",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "アカウント登録",
+                "operationId": "post-v1-user",
+                "parameters": [
+                    {
+                        "description": "アカウント情報",
+                        "name": "account",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v1.UserRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v1.UserResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/models.APIBase"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "AccessToken": []
+                    }
+                ],
+                "description": "アカウントを削除します。",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "アカウント削除",
+                "operationId": "delete-v1-user",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/models.APIBase"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/models.APIBase"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.APIBase": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "エラーコード",
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "models.User": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "v1.AuthData": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "user": {
+                    "type": "object",
+                    "$ref": "#/definitions/models.User"
+                }
+            }
+        },
+        "v1.AuthRequest": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "v1.AuthResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/v1.AuthData"
+                }
+            }
+        },
+        "v1.ButimiListResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "v1.ButimiliRequest": {
+            "type": "object",
+            "properties": {
+                "screen_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "v1.UserData": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "user": {
+                    "type": "object",
+                    "$ref": "#/definitions/models.User"
+                }
+            }
+        },
+        "v1.UserRequest": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "v1.UserResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/v1.UserData"
+                }
+            }
+        }
+    },
     "securityDefinitions": {
         "AccessToken": {
             "type": "apiKey",

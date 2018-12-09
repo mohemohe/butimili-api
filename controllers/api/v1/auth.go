@@ -14,8 +14,8 @@ type (
 	}
 
 	AuthResponse struct {
-		models.APIBase
-		Data *AuthData `json:"data,omitempty"`
+		models.APIBase `json:"omitempty"`
+		Data           *AuthData `json:"data,omitempty"`
 	}
 
 	AuthData struct {
@@ -24,6 +24,15 @@ type (
 	}
 )
 
+// @Summary 認証状態取得
+// @Description AccessTokenが有効か調べることができます。
+// @ID get-v1-auth
+// @Accept json
+// @Produce json
+// @Security AccessToken
+// @Success 200 {object} v1.AuthResponse
+// @Failure 400 {object} models.APIBase
+// @Router /api/v1/auth [get]
 func GetAuth(c echo.Context) error {
 	defer api.DeferGenericError(c)
 
@@ -37,6 +46,15 @@ func GetAuth(c echo.Context) error {
 	})
 }
 
+// @Summary 認証
+// @Description ユーザー名とパスワードを使用して、AccessTokenを取得します。このAPIは認証なしでアクセスできます。
+// @ID post-v1-auth
+// @Accept json
+// @Produce json
+// @Param account body v1.AuthRequest true "認証情報"
+// @Success 200 {object} v1.AuthResponse
+// @Failure 400 {object} models.APIBase
+// @Router /api/v1/auth [post]
 func PostAuth(c echo.Context) error {
 	defer api.DeferGenericError(c)
 

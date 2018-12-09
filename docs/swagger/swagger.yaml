@@ -1,12 +1,283 @@
 basePath: '{{.BasePath}}'
+definitions:
+  models.APIBase:
+    properties:
+      error:
+        description: エラーコード
+        example: 1
+        type: integer
+    type: object
+  models.User:
+    properties:
+      username:
+        type: string
+    type: object
+  v1.AuthData:
+    properties:
+      token:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+        type: object
+    type: object
+  v1.AuthRequest:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  v1.AuthResponse:
+    properties:
+      data:
+        $ref: '#/definitions/v1.AuthData'
+        type: object
+    type: object
+  v1.ButimiListResponse:
+    properties:
+      data:
+        items:
+          type: string
+        type: array
+    type: object
+  v1.ButimiliRequest:
+    properties:
+      screen_name:
+        type: string
+    type: object
+  v1.UserData:
+    properties:
+      token:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+        type: object
+    type: object
+  v1.UserRequest:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  v1.UserResponse:
+    properties:
+      data:
+        $ref: '#/definitions/v1.UserData'
+        type: object
+    type: object
 host: '{{.Host}}'
 info:
   contact: {}
-  description: '{{.Description}}'
+  description: https://github.com/swaggo/swag の不具合で正常レスポンスの error:0 が表示されていません。全てのJSONレスポンスには
+    error キーを含んだ応答を返します。
   license: {}
   title: butimili API
   version: v1
-paths: {}
+paths:
+  /api/v1/auth:
+    get:
+      consumes:
+      - application/json
+      description: AccessTokenが有効か調べることができます。
+      operationId: get-v1-auth
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.AuthResponse'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIBase'
+            type: object
+      security:
+      - AccessToken: []
+      summary: 認証状態取得
+    post:
+      consumes:
+      - application/json
+      description: ユーザー名とパスワードを使用して、AccessTokenを取得します。このAPIは認証なしでアクセスできます。
+      operationId: post-v1-auth
+      parameters:
+      - description: 認証情報
+        in: body
+        name: account
+        required: true
+        schema:
+          $ref: '#/definitions/v1.AuthRequest'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.AuthResponse'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIBase'
+            type: object
+      summary: 認証
+  /api/v1/butimili:
+    get:
+      description: ブチミリストと生ブチミリを結合した文字列を取得します。
+      operationId: get-v1-butimili
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIBase'
+            type: object
+      security:
+      - AccessToken: []
+      summary: ブチミリ
+  /api/v1/butimili/list:
+    get:
+      description: ブチミリストを取得します。
+      operationId: get-v1-butimili-list
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.ButimiListResponse'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIBase'
+            type: object
+      security:
+      - AccessToken: []
+      summary: ブチミリスト取得
+    put:
+      description: ブチミリストにScreenNameを追加します。
+      operationId: get-v1-butimili-list
+      parameters:
+      - description: アカウント情報
+        in: body
+        name: account
+        required: true
+        schema:
+          $ref: '#/definitions/v1.ButimiliRequest'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.ButimiListResponse'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIBase'
+            type: object
+      security:
+      - AccessToken: []
+      summary: ブチミリスト追加
+  /api/v1/butimili/list/{screen_name}:
+    delete:
+      description: ブチミリストからScreenNameを削除します。
+      operationId: get-v1-butimili-list
+      parameters:
+      - description: ScreenName
+        in: path
+        name: screen_name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.ButimiListResponse'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIBase'
+            type: object
+      security:
+      - AccessToken: []
+      summary: ブチミリスト削除
+  /api/v1/butimili/raw:
+    get:
+      description: ブチミリ本文のみを取得します。このAPIは認証なしでアクセスできます。
+      operationId: get-v1-butimili-raw
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: うおおおおおおおおおおおおあああああああああああああああああああああああああああああああ！！！！！！！！！！！ (ﾌﾞﾘﾌﾞﾘﾌﾞﾘﾌﾞﾘｭﾘｭﾘｭﾘｭﾘｭﾘｭ！！！！！！ﾌﾞﾂﾁﾁﾌﾞﾌﾞﾌﾞﾁﾁﾁﾁﾌﾞﾘﾘｲﾘﾌﾞﾌﾞﾌﾞﾌﾞｩｩｩｩｯｯｯ！！！！！！！)
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIBase'
+            type: object
+      summary: 生ブチミリ
+  /api/v1/user:
+    delete:
+      description: アカウントを削除します。
+      operationId: delete-v1-user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.APIBase'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIBase'
+            type: object
+      security:
+      - AccessToken: []
+      summary: アカウント削除
+    post:
+      description: アカウントを登録します。このAPIは認証なしでアクセスできます。
+      operationId: post-v1-user
+      parameters:
+      - description: アカウント情報
+        in: body
+        name: account
+        required: true
+        schema:
+          $ref: '#/definitions/v1.UserRequest'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.UserResponse'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIBase'
+            type: object
+      summary: アカウント登録
 securityDefinitions:
   AccessToken:
     in: header
