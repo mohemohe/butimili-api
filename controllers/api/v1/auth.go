@@ -14,7 +14,7 @@ type (
 	}
 
 	AuthResponse struct {
-		models.APIBase `json:"omitempty"`
+		models.APIBase
 		Data           *AuthData `json:"data,omitempty"`
 	}
 
