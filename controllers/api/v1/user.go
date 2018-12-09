@@ -4,7 +4,6 @@ import (
 	"github.com/labstack/echo"
 	"github.com/mohemohe/butimili-api/controllers/api"
 	"github.com/mohemohe/butimili-api/models"
-	"github.com/mohemohe/butimili-api/util"
 	"net/http"
 )
 
@@ -66,7 +65,7 @@ func PostUser(c echo.Context) error {
 	if user := models.GetUserByUserName(userRequest.UserName); user == nil {
 		err := models.UpsertUser(&models.User{
 			UserName: userRequest.UserName,
-			Password: *util.Bcrypt(userRequest.Password),
+			Password: userRequest.Password,
 		})
 		if err != nil {
 			panic("cant create user")

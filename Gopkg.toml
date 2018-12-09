@@ -27,10 +27,6 @@
 
 [[constraint]]
   branch = "master"
-  name = "github.com/ahl5esoft/golang-underscore"
-
-[[constraint]]
-  branch = "master"
   name = "github.com/alecthomas/template"
 
 [[constraint]]
