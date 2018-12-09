@@ -104,12 +104,13 @@ func PutButimili(c echo.Context) error {
 	if err := c.Bind(butimiliRequest); err != nil {
 		panic("bind error")
 	}
+	screenName := strings.TrimPrefix(butimiliRequest.ScreenName, "@")
 
 	if butimiList := models.GetButimiListByUserName(user.UserName); butimiList == nil {
 		butimiList = &models.ButimiList{
 			UserName: user.UserName,
 			Targets: []string{
-				butimiliRequest.ScreenName,
+				screenName,
 			},
 		}
 		if err := models.UpsertButimiList(butimiList); err != nil {
@@ -120,7 +121,6 @@ func PutButimili(c echo.Context) error {
 			butimiList.Targets,
 		})
 	} else {
-		screenName := strings.TrimPrefix(butimiliRequest.ScreenName, "@")
 		arr := append(butimiList.Targets, screenName)
 		m := make(map[string]bool)
 		uniq := []string{}
