@@ -106,7 +106,19 @@ func PutButimili(c echo.Context) error {
 	}
 
 	if butimiList := models.GetButimiListByUserName(user.UserName); butimiList == nil {
-		panic("butimilist not found")
+		butimiList = &models.ButimiList{
+			UserName: user.UserName,
+			Targets: []string{
+				butimiliRequest.ScreenName,
+			},
+		}
+		if err := models.UpsertButimiList(butimiList); err != nil {
+			panic("could not upsert")
+		}
+		return c.JSON(http.StatusOK, &ButimiListResponse{
+			models.APIBase{api.GenericOK},
+			butimiList.Targets,
+		})
 	} else {
 		screenName := strings.TrimPrefix(butimiliRequest.ScreenName, "@")
 		arr := append(butimiList.Targets, screenName)
