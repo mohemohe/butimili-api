@@ -9,10 +9,10 @@ import (
 )
 
 var collections = struct {
-	Users string
+	Users       string
 	ButimiLists string
 }{
-	Users: "users",
+	Users:       "users",
 	ButimiLists: "butimilists",
 }
 

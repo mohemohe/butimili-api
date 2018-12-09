@@ -10,7 +10,7 @@ import (
 
 type (
 	UserRequest struct {
-		UserName    string `json:"username"`
+		UserName string `json:"username"`
 		Password string `json:"password"`
 	}
 

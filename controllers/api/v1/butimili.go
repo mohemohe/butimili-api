@@ -11,7 +11,7 @@ import (
 
 type (
 	ButimiliRequest struct {
-		ScreenName    string `json:"screen_name"`
+		ScreenName string `json:"screen_name"`
 	}
 
 	ButimiListResponse struct {
@@ -79,7 +79,7 @@ func PutButimili(c echo.Context) error {
 		screenName := strings.TrimPrefix(butimiliRequest.ScreenName, "@")
 		arr := append(butimiList.Targets, screenName)
 		m := make(map[string]bool)
-		uniq := [] string{}
+		uniq := []string{}
 
 		for _, ele := range arr {
 			if !m[ele] {
@@ -116,7 +116,7 @@ func DeleteButimili(c echo.Context) error {
 		screenName := strings.TrimPrefix(target, "@")
 		arr := append(butimiList.Targets, screenName)
 		m := make(map[string]bool)
-		uniq := [] string{}
+		uniq := []string{}
 
 		for _, ele := range arr {
 			if !m[ele] && ele != screenName {
