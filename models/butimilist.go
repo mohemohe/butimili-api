@@ -18,7 +18,7 @@ func GetButimiListByUserName(username string) *ButimiList {
 	conn := connections.Mongo()
 
 	butimiList := &ButimiList{}
-	err := conn.Collection(collections.Users).FindOne(bson.M{
+	err := conn.Collection(collections.ButimiLists).FindOne(bson.M{
 		"username": username,
 	}, butimiList)
 	if err != nil {
@@ -29,5 +29,5 @@ func GetButimiListByUserName(username string) *ButimiList {
 }
 
 func UpsertButimiList(butimiList *ButimiList) error {
-	return connections.Mongo().Collection(collections.Users).Save(butimiList)
+	return connections.Mongo().Collection(collections.ButimiLists).Save(butimiList)
 }
