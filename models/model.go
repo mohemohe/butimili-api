@@ -9,11 +9,13 @@ import (
 )
 
 var collections = struct {
-	Users       string
-	ButimiLists string
+	Users         string
+	ButimiLists   string
+	InstanceLists string
 }{
-	Users:       "users",
-	ButimiLists: "butimilists",
+	Users:         "users",
+	ButimiLists:   "butimilists",
+	InstanceLists: "instancelists",
 }
 
 type (

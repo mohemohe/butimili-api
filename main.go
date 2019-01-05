@@ -68,6 +68,15 @@ func main() {
 			middlewares.AuthMiddleware,
 		}},
 		{echo.GET, "/api/v1/butimili/raw", v1.GetButimiliText, nil},
+		{echo.GET, "/api/v1/instance/list", v1.ListInstance, &[]echo.MiddlewareFunc{
+			middlewares.AuthMiddleware,
+		}},
+		{echo.PUT, "/api/v1/instance/list", v1.PutInstance, &[]echo.MiddlewareFunc{
+			middlewares.AuthMiddleware,
+		}},
+		{echo.DELETE, "/api/v1/instance/list/:FQDN", v1.DeleteInstance, &[]echo.MiddlewareFunc{
+			middlewares.AuthMiddleware,
+		}},
 	})
 
 	go models.InitDB()
