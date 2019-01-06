@@ -45,6 +45,18 @@ definitions:
       screen_name:
         type: string
     type: object
+  v1.InstanceListResponse:
+    properties:
+      data:
+        items:
+          type: string
+        type: array
+    type: object
+  v1.InstanceRequest:
+    properties:
+      fqdn:
+        type: string
+    type: object
   v1.UserData:
     properties:
       token:
@@ -233,6 +245,79 @@ paths:
             $ref: '#/definitions/models.APIBase'
             type: object
       summary: 生ブチミリ
+  /api/v1/instance/list:
+    get:
+      description: インスタンスリストを取得します。
+      operationId: get-v1-instance-list
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.InstanceListResponse'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIBase'
+            type: object
+      security:
+      - AccessToken: []
+      summary: インスタンスリスト取得
+    put:
+      description: インスタンスリストにFQDNを追加します。
+      operationId: get-v1-instance-list
+      parameters:
+      - description: FQDN
+        in: body
+        name: account
+        required: true
+        schema:
+          $ref: '#/definitions/v1.InstanceRequest'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.InstanceListResponse'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIBase'
+            type: object
+      security:
+      - AccessToken: []
+      summary: インスタンスリスト追加
+  /api/v1/instance/list/{FQDN}:
+    delete:
+      description: インスタンスリストからFQDNを削除します。
+      operationId: get-v1-instance-list
+      parameters:
+      - description: FQDN
+        in: path
+        name: FQDN
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.InstanceListResponse'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIBase'
+            type: object
+      security:
+      - AccessToken: []
+      summary: インスタンスリスト削除
   /api/v1/user:
     delete:
       description: アカウントを削除します。

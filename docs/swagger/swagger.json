@@ -250,6 +250,118 @@
                 }
             }
         },
+        "/api/v1/instance/list": {
+            "get": {
+                "security": [
+                    {
+                        "AccessToken": []
+                    }
+                ],
+                "description": "インスタンスリストを取得します。",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "インスタンスリスト取得",
+                "operationId": "get-v1-instance-list",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v1.InstanceListResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/models.APIBase"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "AccessToken": []
+                    }
+                ],
+                "description": "インスタンスリストにFQDNを追加します。",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "インスタンスリスト追加",
+                "operationId": "get-v1-instance-list",
+                "parameters": [
+                    {
+                        "description": "FQDN",
+                        "name": "account",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v1.InstanceRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v1.InstanceListResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/models.APIBase"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/instance/list/{FQDN}": {
+            "delete": {
+                "security": [
+                    {
+                        "AccessToken": []
+                    }
+                ],
+                "description": "インスタンスリストからFQDNを削除します。",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "インスタンスリスト削除",
+                "operationId": "get-v1-instance-list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "FQDN",
+                        "name": "FQDN",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v1.InstanceListResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/models.APIBase"
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/user": {
             "post": {
                 "description": "アカウントを登録します。このAPIは認証なしでアクセスできます。",
@@ -384,6 +496,25 @@
             "type": "object",
             "properties": {
                 "screen_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "v1.InstanceListResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "v1.InstanceRequest": {
+            "type": "object",
+            "properties": {
+                "fqdn": {
                     "type": "string"
                 }
             }

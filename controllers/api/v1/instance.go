@@ -108,7 +108,7 @@ func PutInstance(c echo.Context) error {
 // @ID get-v1-instance-list
 // @Produce json
 // @Security AccessToken
-// @Param screen_name path string true "FQDN"
+// @Param FQDN path string true "FQDN"
 // @Success 200 {object} v1.InstanceListResponse
 // @Failure 400 {object} models.APIBase
 // @Router /api/v1/instance/list/{FQDN} [delete]
