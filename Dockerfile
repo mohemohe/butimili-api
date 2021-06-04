@@ -4,8 +4,6 @@ WORKDIR /go/src/github.com/mohemohe/butimili-api/
 RUN \
     set -xe; \
     apk --no-cache add alpine-sdk; \
-    go get -u -v github.com/golang/dep/cmd/dep; \
-    dep ensure -v; \
     go build -ldflags "\
       -X go/src/github.com/mohemohe/butimili-api/util.version=$(date '+%y.%m.%U%u%H%M') \
       -X go/src/github.com/mohemohe/butimili-api/util.hash=$(git rev-parse HEAD) \

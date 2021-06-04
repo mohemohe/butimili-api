@@ -1,7 +1,7 @@
 package v1
 
 import (
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 	"github.com/mohemohe/butimili-api/controllers/api"
 	"github.com/mohemohe/butimili-api/models"
 	"net/http"
@@ -15,7 +15,7 @@ type (
 
 	AuthResponse struct {
 		models.APIBase
-		Data           *AuthData `json:"data,omitempty"`
+		Data *AuthData `json:"data,omitempty"`
 	}
 
 	AuthData struct {

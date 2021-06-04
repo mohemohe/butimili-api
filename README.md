@@ -4,6 +4,7 @@
 
 ```sh
 cp sample.env .env
+cp sample.docker-compose.yml docker-compose.yml
 docker-compose up -d
 ```
 

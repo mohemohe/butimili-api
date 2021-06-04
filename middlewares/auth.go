@@ -3,7 +3,7 @@ package middlewares
 import (
 	"errors"
 	"github.com/dgrijalva/jwt-go"
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 	"github.com/mitchellh/mapstructure"
 	"github.com/mohemohe/butimili-api/configs"
 	"github.com/mohemohe/butimili-api/controllers/api"

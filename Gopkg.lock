@@ -108,7 +108,7 @@
 
 [[projects]]
   digest = "1:73c5062c19c602b4d279b581b0ee3ffe43f61bfc37e91885b89190154bb5e909"
-  name = "github.com/labstack/echo"
+  name = "github.com/labstack/echo/v4"
   packages = [
     ".",
     "middleware",
@@ -338,8 +338,8 @@
     "github.com/globalsign/mgo",
     "github.com/globalsign/mgo/bson",
     "github.com/go-bongo/bongo",
-    "github.com/labstack/echo",
-    "github.com/labstack/echo/middleware",
+    "github.com/labstack/echo/v4",
+    "github.com/labstack/echo/v4/middleware",
     "github.com/mitchellh/mapstructure",
     "github.com/mohemohe/echoHelper",
     "github.com/sirupsen/logrus",

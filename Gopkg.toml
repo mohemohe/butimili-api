@@ -42,7 +42,7 @@
   name = "github.com/go-bongo/bongo"
 
 [[constraint]]
-  name = "github.com/labstack/echo"
+  name = "github.com/labstack/echo/v4"
   version = "3.3.8"
 
 [[constraint]]

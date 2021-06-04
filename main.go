@@ -1,16 +1,16 @@
 package main
 
 import (
-	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/mohemohe/butimili-api/configs"
 	"github.com/mohemohe/butimili-api/controllers"
-	"github.com/mohemohe/butimili-api/controllers/api/v1"
+	v1 "github.com/mohemohe/butimili-api/controllers/api/v1"
 	_ "github.com/mohemohe/butimili-api/docs"
 	"github.com/mohemohe/butimili-api/middlewares"
 	"github.com/mohemohe/butimili-api/models"
-	"github.com/mohemohe/echoHelper"
-	"github.com/swaggo/echo-swagger"
+	"github.com/mohemohe/echoHelper/v4"
+	echoSwagger "github.com/swaggo/echo-swagger"
 )
 
 // @Title butimili API
