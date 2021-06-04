@@ -104,3 +104,4 @@ modules.xml
 # End of https://www.gitignore.io/api/go,intellij+all
 
 \.env
+docker-compose.yml
